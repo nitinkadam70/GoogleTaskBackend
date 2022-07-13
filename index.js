@@ -16,7 +16,7 @@ app.use("/auth", authRouter);
 app.use("/user", taskRouter);
 
 app.get("/", (req, res) => {
-    res.send("Homepage")
+    return res.send("Homepage")
 })
 
 const port = process.env.PORT || 8080

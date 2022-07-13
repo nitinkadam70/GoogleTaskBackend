@@ -7,7 +7,7 @@ const taskRouter = Router();
 taskRouter.get("/:userId/task", async (req, res) => {
     let userId = req.params;
     let task = await TaskModel.find(userId)
-    res.send(task)
+    return res.send(task)
 })
 
 taskRouter.post("/:userId/task", async (req, res) => {
@@ -29,10 +29,10 @@ taskRouter.delete("/:userId/task/:id", async (req, res) => {
     const id = req.params.id
     try {
         const task = await TaskModel.deleteOne({ _id: id }, {})
-        res.status(201).send({ message: "Deleted Sucessfully" })
+        return res.status(201).send({ message: "Deleted Sucessfully" })
     }
     catch {
-        res.status(500).send({ message: "Error while Deleting" })
+        return res.status(500).send({ message: "Error while Deleting" })
     }
 })
 
@@ -40,10 +40,10 @@ taskRouter.patch("/:userId/task/:id", async (req, res) => {
     try {
         const _id = req.params.id
         const updateTask = await TaskModel.findByIdAndUpdate(_id, req.body);
-        res.send(updateTask)
+        return res.send(updateTask)
     }
     catch (error) {
-        res.status(400).send(error)
+        return res.status(400).send(error)
     }
 })
 

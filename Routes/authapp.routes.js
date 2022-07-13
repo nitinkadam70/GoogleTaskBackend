@@ -8,7 +8,7 @@ authRouter.post("/signup", async (req, res) => {
     const user = await new UserModel(req.body)
     user.save((err, success) => {
         if (err) {
-            res.status(500).send({ message: "Internal server error occurred" })
+            return res.status(500).send({ message: "Internal server error occurred" })
         }
         return res.status(201).send({ message: "Sign up success", token: 54321 })
     });
@@ -24,9 +24,9 @@ authRouter.post("/login", async (req, res) => {
             name,
             token: 54321
         }
-        res.send(payload);
+        return res.send(payload);
     }
-    res.send({ message: "Wrong credentials" })
+    return res.send({ message: "Wrong credentials" })
 })
 
 module.exports = authRouter;
